@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Alert, AlertTitle, Snackbar} from "@mui/material";
 import {useSelector} from "react-redux";
 import {AppRootStateType} from "../redux/store";

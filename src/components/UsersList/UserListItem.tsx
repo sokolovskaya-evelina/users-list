@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import {Divider, IconButton, ListItem, ListItemButton, ListItemText, Typography} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Modal from "../Modal";
 import {UserDataType} from "../../api/api";
 import {useAppDispatch} from "../../redux/store";
 import {deleteUser} from "../../redux/slice/users";
+import DOMPurify from "dompurify";
+
 
 type PropsType = {
     user: UserDataType,
@@ -15,6 +17,10 @@ type PropsType = {
 
 const UserListItem = ({user, usersLength, index}: PropsType) => {
     const dispatch = useAppDispatch()
+
+    const cleanName = DOMPurify.sanitize(user.name);
+    const cleanUserName = DOMPurify.sanitize(user.username);
+    const cleanEmail = DOMPurify.sanitize(user.email);
 
     const [isOpenModal, setIsOpenModal] = useState(false)
     return (
@@ -29,13 +35,13 @@ const UserListItem = ({user, usersLength, index}: PropsType) => {
             >
                 <ListItemButton onClick={() => setIsOpenModal(true)}>
                     <ListItemText>
-                        <span dangerouslySetInnerHTML={{__html:`${user.name} (${user.username})`}}/>
-                        <Typography variant={'body2'} sx={{color: 'rgba(0,0,0,0.6)'}}  className={'.MuiListItemText-secondary'} dangerouslySetInnerHTML={{__html: user.email}}/>
+                        <span dangerouslySetInnerHTML={{__html:`${cleanName} (${cleanUserName})`}}/>
+                        <Typography variant={'body2'} sx={{color: 'rgba(0,0,0,0.6)'}}  className={'.MuiListItemText-secondary'} dangerouslySetInnerHTML={{__html: cleanEmail}}/>
                     </ListItemText>
                 </ListItemButton>
             </ListItem>
             {index !== usersLength && <Divider/>}
-            <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal} user={user}/>
+            {isOpenModal && <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal} user={user}/>}
         </>
     );
 };

@@ -1,4 +1,3 @@
-import React from 'react';
 import {List, Typography} from "@mui/material";
 import UserListItem from "./UserListItem";
 import {useSelector} from "react-redux";
@@ -15,8 +14,8 @@ const UsersList = ({value}: PropsType) => {
     const val = value.toLowerCase().trim()
 
     const filteredUsers = users.filter(user => (user.name.toLowerCase().includes(val) || user.username.toLowerCase().includes(val) || user.email.toLowerCase().includes(val)))
-    const markUser = (string: string, pos: number, len: number) => string.slice(0, pos) + '<mark>' + string.slice(pos, pos + len) + '</mark>' + string.slice(pos + len)
 
+    const markUser = (string: string, pos: number, len: number) => string.slice(0, pos) + '<mark>' + string.slice(pos, pos + len) + '</mark>' + string.slice(pos + len)
 
     const newUserArray = filteredUsers.map((user) => {
         if (val === '') {
@@ -30,7 +29,6 @@ const UsersList = ({value}: PropsType) => {
             }
         }
     })
-
 
     return (
         <List sx={{width: '100%', margin: '0 auto', maxWidth: '500px', bgcolor: 'background.paper'}}>
