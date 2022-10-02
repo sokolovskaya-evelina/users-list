@@ -2,6 +2,7 @@
   "name": "firebird_tours",
   "version": "0.1.0",
   "private": true,
+  "homepage": "http://sokolovskaya-evelina.github.io/users-list",
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
@@ -30,7 +31,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -52,6 +55,7 @@
   },
   "devDependencies": {
     "@types/dompurify": "^2.3.4",
-    "dompurify": "^2.4.0"
+    "dompurify": "^2.4.0",
+    "gh-pages": "^4.0.0"
   }
 }
